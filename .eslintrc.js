@@ -16,6 +16,10 @@ module.exports = {
     // 'plugin:vue/recommended',
   ],
 
+  settings: {
+    'import/resolver': 'nuxt',
+  },
+
   rules: {
     indent: 'off',
     'indent-legacy': ['error', 'tab'],
@@ -37,7 +41,6 @@ module.exports = {
       "ignoreHTMLTextContents": false,
     }],
 
-    'import/no-unresolved': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
