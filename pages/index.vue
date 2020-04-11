@@ -90,7 +90,7 @@ export default {
 
 	methods: {
 		async compileCss() {
-			this.output = await this.$axios.$post('/postcss', {
+			this.output = await this.$http.$post('postcss', {
 				options: this.options,
 				css: this.inputCss,
 			});

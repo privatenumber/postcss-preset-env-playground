@@ -1,3 +1,5 @@
+import serverApi from './server-api';
+
 module.exports = {
 	mode: 'universal',
 
@@ -28,10 +30,14 @@ module.exports = {
 		'@nuxtjs/stylelint-module',
 	],
 	modules: [
-		'@nuxtjs/axios',
+		'@nuxt/http',
 	],
 	axios: {
 		// See https://github.com/nuxt-community/axios-module#options
 		browserBaseURL: '/',
 	},
+
+	serverMiddleware: [
+		serverApi,
+	],
 };
