@@ -1,4 +1,5 @@
-import api from './server-middleware/api';
+import compression from 'compression';
+import bodyParser from 'body-parser';
 
 module.exports = {
 	mode: 'universal',
@@ -60,6 +61,19 @@ module.exports = {
 	},
 
 	serverMiddleware: [
-		api,
+		compression(),
+		bodyParser.json(),
+		(req, res, next) => {
+			res.json = function json(obj) {
+				res.setHeader('Content-Type', 'application/json');
+				res.end(JSON.stringify(obj));
+				return this;
+			};
+			next();
+		},
+		{
+			path: '/postcss',
+			handler: '~/server-middleware/postcss',
+		},
 	],
 };
