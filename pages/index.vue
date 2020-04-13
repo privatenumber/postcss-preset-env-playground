@@ -95,7 +95,7 @@ export default {
 
 	methods: {
 		async compileCss() {
-			this.output = await this.$http.$post('postcss', {
+			this.output = await this.$http.$post('api/postcss', {
 				options: this.options,
 				css: this.inputCss,
 			}).catch((err) => {

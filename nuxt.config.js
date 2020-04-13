@@ -76,7 +76,7 @@ module.exports = {
 			next();
 		},
 		{
-			path: '/postcss',
+			path: '/api/postcss',
 			handler: '~/api/postcss',
 		},
 	],
