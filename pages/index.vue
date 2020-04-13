@@ -87,6 +87,9 @@ export default {
 
 	created() {
 		this.compileCss = debounce(this.compileCss, 500);
+	},
+
+	beforeMount() {
 		this.compileCss();
 	},
 

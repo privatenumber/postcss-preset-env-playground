@@ -2,7 +2,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 
 module.exports = {
-	mode: 'universal',
+	mode: 'spa',
 
 	head: {
 		title: 'PostCSS preset-env Playground',
@@ -77,7 +77,7 @@ module.exports = {
 		},
 		{
 			path: '/postcss',
-			handler: '~/server-middleware/postcss',
+			handler: '~/api/postcss',
 		},
 	],
 };
