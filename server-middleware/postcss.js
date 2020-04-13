@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
 		const compiled = await postcss([
 			postcssPresetEnv(options),
 		]).process(css);
-		res.json({ css: compiled.css });
+		res.status(200).json({ css: compiled.css });
 	} catch (err) {
-		res.json({ err });
+		res.status(422).json({ err: err.message });
 	}
 };

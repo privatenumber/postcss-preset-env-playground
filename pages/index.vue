@@ -20,7 +20,6 @@ import debounce from 'lodash/debounce';
 import CssInput from '~/components/css-input.vue';
 import CssOutput from '~/components/css-output.vue';
 
-
 const initialCss = `
 @custom-media --viewport-medium (width <= 50rem);
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
@@ -96,6 +95,11 @@ export default {
 			this.output = await this.$http.$post('postcss', {
 				options: this.options,
 				css: this.inputCss,
+			}).catch((err) => {
+				if (err.response.status === 422) {
+					return err.response.json();
+				}
+				throw err;
 			});
 		},
 	},

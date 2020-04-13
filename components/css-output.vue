@@ -37,7 +37,7 @@ export default {
 	},
 	props: {
 		error: {
-			type: Object,
+			type: String,
 			default: undefined,
 		},
 		css: {
@@ -64,8 +64,6 @@ export default {
 	background-color: #e23d31;
 	color: #fff;
 	padding: 16px;
-	white-space: pre-wrap;
-	word-break: break-all;
 }
 
 .output-container {

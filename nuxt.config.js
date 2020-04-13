@@ -64,6 +64,10 @@ module.exports = {
 		compression(),
 		bodyParser.json(),
 		(req, res, next) => {
+			res.status = function status(code) {
+				this.statusCode = code;
+				return this;
+			};
 			res.json = function json(obj) {
 				res.setHeader('Content-Type', 'application/json');
 				res.end(JSON.stringify(obj));
