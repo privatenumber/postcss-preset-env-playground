@@ -1,4 +1,4 @@
-import serverApi from './server-api';
+import api from './server-middleware/api';
 
 module.exports = {
 	mode: 'universal',
@@ -13,6 +13,18 @@ module.exports = {
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 		],
+		script: [
+			{ type: 'text/javascript', src: 'https://unpkg.com/systemjs@6.3.0/dist/system.min.js' },
+			{ type: 'text/javascript', src: 'https://unpkg.com/systemjs@6.3.0/dist/extras/amd.min.js' },
+			{
+				type: 'systemjs-importmap',
+				json: {
+					imports: {
+						'codemirror/': 'https://unpkg.com/codemirror@5.52.2/',
+					},
+				},
+			},
+		],
 	},
 	/*
 	** Customize the progress-bar color
@@ -24,7 +36,7 @@ module.exports = {
 	*/
 	buildModules: [
 		// Doc: https://github.com/nuxt-community/eslint-module
-		'@nuxtjs/eslint-module',
+		// ['@nuxtjs/eslint-module'],
 
 		// Doc: https://github.com/nuxt-community/stylelint-module
 		'@nuxtjs/stylelint-module',
@@ -37,7 +49,16 @@ module.exports = {
 		browserBaseURL: '/',
 	},
 
+	build: {
+		postcss: {
+			preset: {
+				stage: 0,
+			},
+		},
+		friendlyErrors: false,
+	},
+
 	serverMiddleware: [
-		serverApi,
+		api,
 	],
 };

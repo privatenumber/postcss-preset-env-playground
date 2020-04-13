@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="output">
 		<div
 			v-if="error"
 			class="error"
@@ -13,18 +13,37 @@
 			>
 				{{ size }}
 			</span>
-			<pre
-				class="output-css"
-			>{{ css }}</pre>
+			<client-only>
+				<codemirror
+					class="codemirror"
+					:value="css"
+					mode="css"
+					read-only
+					line-numbers
+					line-wrapping
+					cursor-blink-rate="-1"
+					theme="material"
+				/>
+			</client-only>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
+
+	components: {
+		Codemirror: () => (process.env.VUE_ENV === 'client') && import('~/components/codemirror.vue'),
+	},
 	props: {
-		error: null,
-		css: String,
+		error: {
+			type: Object,
+			default: undefined,
+		},
+		css: {
+			type: String,
+			default: undefined,
+		},
 	},
 
 	computed: {
@@ -37,11 +56,16 @@ export default {
 </script>
 
 <style scoped>
+.output {
+	height: 100%;
+}
+
 .error {
-	background-color: #f44336;
+	background-color: #e23d31;
 	color: #fff;
-	padding: 8px;
-	white-space: pre;
+	padding: 16px;
+	white-space: pre-wrap;
+	word-break: break-all;
 }
 
 .output-container {
@@ -52,13 +76,13 @@ export default {
 	position: absolute;
 	top: 0;
 	right: 0;
-	background: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.25);
 	color: #fff;
 	padding: 8px;
 }
 
-.output-css {
-	padding: 16px;
-	font-size: 11px;
+.codemirror {
+	height: 100%;
 }
 </style>

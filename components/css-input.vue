@@ -46,24 +46,52 @@
 			>
 				{{ size }}
 			</span>
-			<textarea
-				v-model="model"
-				class="css-textarea"
-				@keydown="handleTab"
-			/>
+			<client-only>
+				<codemirror
+					v-model="model"
+					class="codemirror"
+					line-numbers
+					mode="css"
+					theme="material"
+					style-active-line
+					key-map="sublime"
+					auto-close-brackets
+					line-wrapping
+					:import-addons="[
+						'edit/closebrackets'
+					]"
+				/>
+			</client-only>
 		</div>
 	</div>
 </template>
 
 <script>
+
 export default {
+	components: {
+		Codemirror: () => {
+			if (process.env.VUE_ENV === 'server') { return {}; }
+			return import('~/components/codemirror.vue');
+		},
+	},
+
 	inheritAttrs: false,
 
 	model: {
 		event: 'update',
 	},
 
-	props: ['value', 'options'],
+	props: {
+		value: {
+			type: String,
+			required: true,
+		},
+		options: {
+			type: Object,
+			required: true,
+		},
+	},
 
 	computed: {
 		model: {
@@ -142,18 +170,13 @@ export default {
 	position: absolute;
 	top: 0;
 	right: 0;
-	background: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.25);
 	color: #fff;
 	padding: 8px;
 }
 
-.css-textarea {
-	width: 100%;
+.codemirror {
 	height: 100%;
-	resize: none;
-	border: none;
-	outline: none;
-	padding: 16px;
-	font-family: monospace;
 }
 </style>

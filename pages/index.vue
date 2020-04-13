@@ -67,7 +67,10 @@ export default {
 				browsers: 'last 2 versions',
 			},
 			inputCss: initialCss,
-			output: {},
+			output: {
+				err: null,
+				css: '',
+			},
 		};
 	},
 
