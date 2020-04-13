@@ -41,11 +41,12 @@ module.exports = {
 		// Doc: https://github.com/nuxt-community/stylelint-module
 		'@nuxtjs/stylelint-module',
 	],
+
 	modules: [
 		'@nuxt/http',
 	],
-	axios: {
-		// See https://github.com/nuxt-community/axios-module#options
+
+	http: {
 		browserBaseURL: '/',
 	},
 
