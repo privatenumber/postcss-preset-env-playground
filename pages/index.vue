@@ -96,7 +96,7 @@ export default {
 				options: this.options,
 				css: this.inputCss,
 			}).catch((err) => {
-				if (err.response.status === 422) {
+				if (err.response && err.response.status === 422) {
 					return err.response.json();
 				}
 				throw err;
